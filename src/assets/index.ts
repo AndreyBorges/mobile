@@ -1,0 +1,6 @@
+export { default as backgroundGalaxy } from './background-galaxy.png'
+export { default as backgroundGalaxy2 } from './background-galaxy2.png'
+export { default as backgroundGalaxy3 } from './background-galaxy3.png'
+export { default as logoNlwEsports } from './logo-nlw-esports.png'
+export { default as logoNlwEsports2x } from './logo-nlw-esports2.png'
+export { default as logoNlwEsports3x } from './logo-nlw-esports3.png'
