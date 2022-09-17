@@ -7,7 +7,7 @@ import {
   Inter_900Black
 } from '@expo-google-fonts/inter'
 import { Background, Loading } from './src/components'
-import { Home } from './src/screens'
+import { Routes } from './src/routes'
 const App = () => {
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
@@ -18,7 +18,7 @@ const App = () => {
   return (
     <Background>
       <StatusBar barStyle='light-content' backgroundColor='trasparent' translucent />
-      {fontsLoaded ? <Home /> : <Loading />}
+      {fontsLoaded ? <Routes /> : <Loading />}
     </Background>
   )
 }

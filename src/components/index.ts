@@ -1,4 +1,6 @@
 export { default as Header } from './header'
 export { default as Loading } from './loading'
+export { default as DuoCard } from './duo-card'
+export { default as DuoInfo } from './duo-info'
 export { default as GameCard } from './game-card'
 export { default as Background } from './background'
