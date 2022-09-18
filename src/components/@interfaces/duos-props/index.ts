@@ -1,4 +1,4 @@
-import { ColorValue } from 'react-native'
+import { ColorValue, ModalProps } from 'react-native'
 
 export interface IDuoCard {
   hourEnd: string
@@ -19,4 +19,9 @@ export interface DuoInfoProps {
   label: string
   value: string
   colorValue?: ColorValue
+}
+
+export interface DuoMatchProps extends ModalProps {
+  discord: string
+  onClose: () => void
 }

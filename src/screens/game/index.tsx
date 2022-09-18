@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from 'react'
 import { FlatList, Image, TouchableOpacity, View, Text } from 'react-native'
 import { Entypo } from '@expo/vector-icons'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Background, DuoCard, Header } from '../../components'
+import { Background, DuoCard, DuoMatch, Header } from '../../components'
 import { GameScreenProps } from '../@interface'
 import { styles } from './styles'
 import { THEME } from '../../theme'
@@ -12,12 +12,21 @@ import { IDuoCard } from '../../components/@interfaces'
 
 const Game: FC = () => {
   const [duos, setDuos] = useState<IDuoCard[]>([])
+  const [discordDuoSelected, setDiscordDuoSelected] = useState('')
   const route = useRoute()
   const navigation = useNavigation()
   const { bannerUrl, id, title } = route.params as GameScreenProps
 
   const handleGoBack = () => {
     navigation.goBack()
+  }
+
+  const getDiscordUser = async (adsID: string) => {
+    fetch(`http://192.168.1.8:3333/ads/${adsID}/discord`)
+      .then(resp => resp.json())
+      .then(data => {
+        setDiscordDuoSelected(data.discord)
+      })
   }
 
   useEffect(() => {
@@ -45,7 +54,9 @@ const Game: FC = () => {
         <FlatList
           data={duos}
           keyExtractor={item => item.id}
-          renderItem={({ item }) => <DuoCard data={item} onConnect={() => {}} />}
+          renderItem={({ item }) => (
+            <DuoCard data={item} onConnect={() => getDiscordUser(item.id)} />
+          )}
           horizontal
           style={styles.containerList}
           showsHorizontalScrollIndicator={false}
@@ -53,6 +64,12 @@ const Game: FC = () => {
           ListEmptyComponent={() => (
             <Text style={styles.emptyListText}>Não há anúncios publicados ainda.</Text>
           )}
+        />
+
+        <DuoMatch
+          visible={discordDuoSelected.length > 0}
+          discord={discordDuoSelected}
+          onClose={() => setDiscordDuoSelected('')}
         />
       </SafeAreaView>
     </Background>
